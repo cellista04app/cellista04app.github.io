@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title id="titulo">Iniciar sesión</title>
+		<style>
+			#inicio{
+				margin: auto;
+				padding: 10px;
+				border-radius: 20px;
+				border: 2px solid;
+				border-color: #4fff4f;
+				width: 400px;
+				height: 300px;
+				display: block;
+			}
+			#inicio input{
+				width: 200px;
+				height: 40px;
+			}
+			#inicio button{
+				width: 150px;
+				height: 40px;
+				background-color: #4fffff;
+			}
+			#sesion{
+				margin: auto;
+				padding: 10px;
+				border-radius: 20px;
+				display: none;
+			}
+			#m_div{
+				margin: auto;
+				float: left;
+				padding: 10px;
+				border: 2px solid;
+				border-color: #4fff4f;
+				width: 520px;
+				height: 580px;
+			}
+			#m_div input{
+				width: 500px;
+				height: 40px;
+			}
+			#m_div button{
+				width: 160px;
+				height: 40px;
+				background-color: #4fffff;
+			}
+			#u_div{
+				margin: auto;
+				float: left;
+				padding: 10px;
+				border: 1px solid;
+				border-color: #4fffff;
+				width: 200px;
+				height: 580px;
+				overflow: auto;
+			}
+			#mensajes{
+				width: 502px;
+				height: 280px;
+				border: 1px solid;
+				border-color: black;
+				overflow: auto;
+			}
+			button{
+				cursor: pointer;
+			}
+			#m_op{
+				padding: 10px;
+				width: 260px;
+				height: 580px;
+				float: left;
+				border: 1px solid;
+				border-color: #4fff4f;
+				display: none;
+			}
+			#m_op input{
+				width: 220px;
+				height: 40px;
+			}
+			.urls_re{
+				padding: 10px;
+				width: 180px;
+				height: 40px;
+				border: 1px solid;
+				border-color: black;
+				cursor: pointer;
+			}
+			#form_clave{
+				display: none;
+				margin: auto;
+				width: 400px;
+				height: 300px;
+				border-radius: 20px;
+				padding: 10px;
+				border: 2px solid #4fffff;
+			}
+			#form_clave button{
+				width: 180px;
+				height: 40px;
+				background-color: #4fffff;
+			}
+			#form_clave input{
+				width: 200px;
+				height: 40px;
+			}
+			.button{
+				background-color: #4fffff;
+				width:180px;
+				height:40px;
+			}
+			.button_menu{
+				background-color: #4fffff;
+				width: 170px;
+				height: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button" onclick="playAudio();">Música</button><br>
+		<audio src="https://cellista04app.github.io/dats/salcon.ogg" id="audio"></audio>
+		<div id="inicio">
+			<h3>Iniciar sesión</h3>
+			<form method="GET" action="javascript:iniciar();">
+				<input type="text" id="user" placeholder="Usuario"><br>
+				<input type="password" id="clave" placeholder="Contraseña">
+				<button type="button" onclick="ver_clave();" id="boton_clave">Ver contraseña</button><br>
+				<button type="button" onclick="olv_clave();">Olvide mi contraseña</button><br><br>
+				<button type="submit">Iniciar sesión</button><br>
+			</form>
+			<a id="datos_incorrectos"></a>
+		</div>
+		<div id="form_clave">
+			<a>Usuario:</a><br>
+			<input type="text" id="user_form"><br>
+			<a>Email:</a><br>
+			<input type="email" id="email"><br>
+			<a>Usuario de Tito:</a><br>
+			<input type="text" id="user_form_tito"><br>
+			<button type="button" onclick="getClave();">Aceptar</button>
+		</div>
+		<div id="sesion" onclick="titulo_normal();">
+			<div style='float:left;text-align:center;'>
+				<button type="button" class="button" id="btnmenu" onclick="show_menu();">Configuración</button>
+				<div id="menu" style='display:none;border:2px solid black;height:600px;width:176px;'>
+					<a>Datos sesión iniciada:</a><br>
+					<a>IP:</a><br>
+					<a id="ip2">IP</a><br>
+					<a>Ciudad:</a><br>
+					<a id="city2">Ciudad</a><br>
+					<a>Dejar sesión abierta:</a>
+					<input type="checkbox" id="radio_menu"></br>
+					<button type="button" class="button_menu" onclick="hidde_menu();">Guardar</button>
+				</div>
+			</div>
+			<div id="m_div">
+				<img id="img" style="border-radius: 20px;"><a id="saludo"></a><br>
+				<a id="conectado">Conectando...</a><br>
+				<a id="error_conect"></a><br>
+				<div id="mensajes"></div>
+				<input type="text" id="mensaje_enviar" placeholder="Enviar mensaje" onkeyup="titulo_normal();" onchange="enviar();"><br>
+				<button type="button" id="btnmicro" onclick="micro();">Escribir con la voz</button><br>
+				<input type="text" id="url_enviar" placeholder="Enviar URL" onchange="enviar_URL();"><br>
+				<input type="text" id="img_url" placeholder="Enviar URL imagen de internet" onchange="env_img();">
+				<button type="button" onclick="cerrar_sesion();">Cerrar sesión</button>
+			</div>
+			<div id="u_div"></div>
+			<div id="m_op">
+				<a id="valeria"></a><br>
+				<a id="paula"></a><br>
+				<input type="text" id="URL_abrir" placeholder="Abrir URL" onchange="abrir_URL();"><br>
+				<input type="text" id="alertar" placeholder="Alerta" onchange="alertar();"><br>
+				<input type="text" id="preguntar" placeholder="Preguntar" onchange="preguntar();"><br>
+				<input type="text" id="desc" placeholder="Desconectar usuario" onchange="desconectar();">
+			</div>
+		</div>
+		<script src="https://unpkg.com/annyang@2.6.1/dist/annyang.min.js"></script>
+		<script>
+			var audio=document.getElementById("audio");
+			var inicio=document.getElementById("inicio");
+			var sesion=document.getElementById("sesion");
+			var form_clave=document.getElementById("form_clave");
+			var urls=document.getElementById("u_div");
+			var m_op=document.getElementById("m_op");
+			var mensajes=document.getElementById("mensajes");
+			var boton_clave=document.getElementById("boton_clave");
+			var img=document.getElementById("img");
+			var saludo=document.getElementById("saludo");
+			var conectado=document.getElementById("conectado");
+			var error=document.getElementById("error_conect");
+			var datos_inc=document.getElementById("datos_incorrectos");
+			var val=document.getElementById("valeria");
+			var pau=document.getElementById("paula");
+			var btnmicro=document.getElementById("btnmicro");
+			var btnmenu=document.getElementById("btnmenu");
+			var menu=document.getElementById("menu");
+			var micro_ac=false;
+			var v_clave=false;
+			var user="";
+			var titulo=document.getElementById("titulo");
+			var socket;
+			var ip;
+			var dataConfig={"query":undefined,"city":undefined};
+			function playAudio(){
+				audio.play();
+				audio.volume=0.3;
+				audio.loop=true;
+			}
+			var xip=new XMLHttpRequest();
+			xip.onload=function(){
+				var res=xip.response;
+				res=JSON.parse(res);
+				dataConfig=res;
+				ip=res.ip;
+			}
+			xip.open("GET","https://ipapi.co/json");
+			xip.send();
+			var users={
+				"ValeriaRD":{"email":"valerikard08@gmail.com","clave":"0401vrd","admin":false,"img":"https://lh4.googleusercontent.com/-DWV4arA7-Ho/AAAAAAAAAAI/AAAAAAAACqU/kT05LcQXETMgYSUXwR2xonGxx-vbOTFRQCLcDEAE/s32-c-k-no/photo.jpg"},
+				"RobertoDP":{"email":"undefined","clave":"rdp04081205","admin":true,"img":"https://lh4.googleusercontent.com/-pzAWCrFrvDc/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJNgtt4bSvR-SGZ4tIy9qMjkhQnCLA/s32-c-k-no/photo.jpg"},
+				"PaulaDP":{"email":"dizparrondopaula@gmail.com","clave":"1702pdp","admin":false,"img":"https://lh4.googleusercontent.com/-1nDXkSG0C4M/AAAAAAAAAAI/AAAAAAAAAAA/AAKWJJMkkDP-QNSvcRNhDF_DokvmnwmLBw/s32-c-k-no/photo.jpg"}
+			};
+			var radio_menu=document.getElementById("radio_menu");
+			if (localStorage.sessionOpen){
+				var s=localStorage.sessionOpen;
+				var state=false;
+				if (s=="true"){state=true;}
+				radio_menu.checked=state;
+				if(state==true){
+					var u2=document.getElementById("user");
+					var c2=document.getElementById("clave");
+					u2.value=localStorage.user;
+					c2.value=localStorage.clave;
+					iniciar();
+				}
+			}
+			function show_menu(){
+				btnmenu.hidden=true;
+				document.getElementById("ip2").innerHTML=ip;
+				document.getElementById("city2").innerHTML=dataConfig.city;
+				menu.style.display="block";
+			}
+			function hidde_menu(){
+				btnmenu.hidden=false;
+				menu.style.display="none";
+				var state=radio_menu.checked;
+				localStorage.sessionOpen=state;
+				if (state==true){
+					localStorage.user=user;
+					localStorage.clave=users[user]["clave"];
+				}
+				else{
+					localStorage.user=undefined;
+					localStorage.clave=undefined;
+				}
+			}
+			function micro(){
+				if (micro_ac==false){
+					let commands={
+						"enviar mensaje":()=>{
+							enviar();
+						},
+						"borrar mensaje":()=>{
+							document.getElementById("mensaje_enviar").value="";
+						},
+						"*work":(work)=>{
+							document.getElementById("mensaje_enviar").value=document.getElementById("mensaje_enviar").value+work+" ";
+						}
+					};
+					annyang.setLanguage("es-ES");
+					annyang.addCommands(commands);
+					annyang.start();
+					btnmicro.innerHTML="Apagar micrófono";
+					micro_ac=true;
+				}
+				else{
+					annyang.abort();
+					btnmicro.innerHTML="Escribir con la voz";
+					micro_ac=false;
+				}
+			}
+			function titulo_normal(){
+				titulo.innerHTML="Iniciar sesión";
+			}
+			function ver_clave(){
+				if (v_clave==false){
+					document.getElementById("clave").type="text";
+					boton_clave.innerHTML="Esconder contraseña";
+					v_clave=true;
+				}
+				else{
+					document.getElementById("clave").type="password";
+					boton_clave.innerHTML="Ver contraseña";
+					v_clave=false;
+				}
+			}
+			function olv_clave(){
+				inicio.style.display="none";
+				form_clave.style.display="block";
+				datos_inc.innerHTML="";
+			}
+			function getClave(){
+				var us=document.getElementById("user_form");
+				var email=document.getElementById("email");
+				var ut=document.getElementById("user_form_tito");
+				if (us.value in users){
+					if (ut.value=="RobertoDP"){
+						if (users[us.value]["email"]==email.value && users[us.value]["admin"]==false){
+							document.getElementById("clave").value=users[us.value]["clave"]
+						}
+					}
+				}
+				us.value=""
+				email.value=""
+				ut.value=""
+				form_clave.style.display="none";
+				inicio.style.display="block";
+			}
+			function cerrar_sesion(){
+				cerrar_socket();
+				sesion.style.display="none";
+				inicio.style.display="block";
+				m_op.style.display="none";
+				mensajes.innerHTML="";
+				conectado.innerHTML="Conectando...";
+				urls.innerHTML="";
+			}
+			function cerrar_socket(){
+				error.innerHTML="";
+				conectado.innerHTML="Desconectado";
+				socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_connect_false"}');
+				socket.close();
+			}
+			function iniciar(){
+				datos_inc.style.color="red";
+				var usuario=document.getElementById("user").value;
+				var clave=document.getElementById("clave").value;
+				if (usuario in users){
+					user=usuario;
+					if (users[user]["clave"]==clave){
+						datos_inc.innerHTML="";
+						img.src=users[user]["img"];
+						saludo.innerHTML="Bienvenido/a "+user;
+						document.getElementById("clave").value="";
+						inicio.style.display="none";
+						sesion.style.display="block";
+						if (users[user]["admin"]==true){
+							m_op.style.display="block";
+						}
+						setTimeout("conectar();",1000);
+					}
+					else{
+						datos_inc.innerHTML="Datos incorrectos";
+					}
+				}
+				else{
+					datos_inc.innerHTML="Datos incorrectos";
+				}
+			}
+			function conectar(){
+				socket=new WebSocket("wss://ws.achex.ca/");
+				socket.onopen=function(){
+					socket.send('{"setID":"dsfa3fy374863aushdfla834yr_chat","passwd":"eidk4875kjasdjeidyu"}');
+					if (users[user]["admin"]==false){
+						socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_connect_true"}');
+					}
+					else{
+						socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_connect"}');
+					}
+					conectado.innerHTML="Conectado";
+				};
+				socket.onerror=function(e){
+					error.innerHTML="Error: "+e;
+				};
+				socket.onclose=function(){
+					conectado.innerHTML="Desconectado";
+				};
+				socket.onmessage=function(m){
+					m=m.data;
+					m=JSON.parse(m);
+					var u=m.usuario;
+					var c=m.command;
+					var men=m.contenido;
+					if (c=="user_connect"){
+						if (users[user]["admin"]==false){
+							socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_connect_true"}');
+						}
+					}
+					else if(c=="user_connect_true"){
+						if (users[user]["admin"]==true){
+							if (u=="ValeriaRD"){
+								val.innerHTML="ValeriaRD: conectada";
+							}
+							else if(u=="PaulaDP"){
+								pau.innerHTML="PaulaDP: conectada";
+							}
+							else{
+								alert (u+" se ha conectado");
+							}
+						}
+					}
+					else if(c=="user_connect_false"){
+						if (users[user]["admin"]==true){
+							if (u=="ValeriaRD"){
+								val.innerHTML="ValeriaRD: desconectada";
+							}
+							else if(u=="PaulaDP"){
+								pau.innerHTML="PaulaDP: desconectada";
+							}
+							else{
+								alert (u+" se ha desconectado");
+							}
+						}
+					}
+					else if(c=="user_start"){
+						if (users[user]["admin"]==false){
+							window.open(men);
+						}
+					}
+					else if(c=="user_alert"){
+						if (users[user]["admin"]==false){
+							alert (men);
+						}
+					}
+					else if(c=="user_send_url"){
+						urls.innerHTML=urls.innerHTML+"<a href='"+men+"'>URL de "+u+"</a><br>";
+					}
+					else if(c=="user_mensaje"){
+						var fecha=new Date();
+						var hora=fecha.getHours();
+						var minutos=fecha.getMinutes();
+						var time=hora+":"+minutos;
+						if (u==user){
+							mensajes.innerHTML="<div style='float:right;padding:10px;width:300px;border-radius:20px;background-color:white;border:1px solid #dedede;'>"+u+": "+men+"<br>"+time+"</div>"+mensajes.innerHTML;
+						}
+						else{
+							mensajes.innerHTML="<div style='float:left;padding:10px;width:300px;border-radius:20px;background-color:#dedede;'>"+u+": "+men+"<br>"+time+"</div>"+mensajes.innerHTML;
+							titulo.innerHTML=u;
+						}
+					}
+					else if(c=="user_question"){
+						if (users[user]["admin"]==false){
+							var response=prompt(men);
+							socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_question_response","contenido":"'+response+'"}');
+						}
+					}
+					else if(c=="user_question_response"){
+						if (users[user]["admin"]==true){
+							alert (u+": "+men);
+						}
+					}
+					else if(c=="user_disconnect"){
+						if (users[user]["admin"]==false){
+							if (men==user){
+								cerrar_socket();
+							}
+						}
+					}
+					else if(c=="user_send_img"){
+						urls.innerHTML=urls.innerHTML+"<img style='width:180px;height:110px;' title='"+u+"' src='"+men+"'><br>";
+					}
+				};
+			}
+			function enviar(){
+				var mens=document.getElementById("mensaje_enviar").value;
+				socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_mensaje","contenido":"'+mens+'"}');
+				document.getElementById("mensaje_enviar").value="";
+			}
+			function enviar_URL(){
+				var url_e=document.getElementById("url_enviar").value;
+				socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_send_url","contenido":"'+url_e+'"}');
+				document.getElementById("url_enviar").value="";
+			}
+			function alertar(){
+				var ale=document.getElementById("alertar").value;
+				if (users[user]["admin"]==true){
+					socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_alert","contenido":"'+ale+'"}');
+				}
+				document.getElementById("alertar").value="";
+			}
+			function abrir_URL(){
+				var url=document.getElementById("URL_abrir").value;
+				if (users[user]["admin"]==true){
+					socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_start","contenido":"'+url+'"}');
+				}
+				document.getElementById("URL_abrir").value="";
+			}
+			function preguntar(){
+				var preg=document.getElementById("preguntar").value;
+				if (users[user]["admin"]==true){
+					socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_question","contenido":"'+preg+'"}');
+				}
+				document.getElementById("preguntar").value="";
+			}
+			function desconectar(){
+				var user_desc=document.getElementById("desc").value;
+				if (users[user]["admin"]==true){
+					socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_disconnect","contenido":"'+user_desc+'"}');
+				}
+				document.getElementById("desc").value="";
+			}
+			function env_img(){
+				var url_img=document.getElementById("img_url").value;
+				socket.send('{"to":"dsfa3fy374863aushdfla834yr_chat","usuario":"'+user+'","command":"user_send_img","contenido":"'+url_img+'"}');
+				document.getElementById("img_url").value="";
+			}
+            var roomId="dsfa3fy374863aushdfla834yr_call";
+		</script>
+	</body>
+</html>
